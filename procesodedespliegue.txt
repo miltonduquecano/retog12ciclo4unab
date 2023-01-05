@@ -1,0 +1,80 @@
+CICLO 4 ----- MAQUINA VIRTUAL, configuración inicial
+
+Ingresar a maquina desde consola
+
+chmod 400 llave-privada.key
+
+ssh -i llave-privada.key opc@ip-instancia
+
+
+sudo yum install docker
+
+
+sudo yum install git
+
+Clonar los archivos que voy a usar
+
+git clone "link de mi repo de github"
+
+
+cd "carpeta de mi repositorio"
+
+
+Back----------------
+
+
+sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+sudo firewall-cmd --reload
+
+
+docker build -t back .
+docker run -p 8080:4000 back
+
+Ejecutar continuamente
+
+docker run -it -d -p 8080:4000 back
+
+
+URL para pruebas
+
+http://129.xxx.xx.xx:8080/api/categorias/home
+
+
+Dejar ejecutando el Back y abrir otro ventana, o usar la misma
+
+
+Front----------------
+
+
+sudo firewall-cmd --zone=public --add-port=8180/tcp --permanent
+sudo firewall-cmd --reload
+
+
+docker build -t front .
+
+docker run -it -d -p 8180:3000 front
+docker run -p 8180:3000 front
+
+URL para pruebas
+
+http://129.xxx.xx.xx:8180
+
+
+PARAR TODAS LAS IMAGENES DE DOCKER
+
+docker stop $(docker ps -a -q)
+
+
+ELIMINAR IMAGENES 
+
+
+docker rmi $(docker imagenes -q)
+
+O TAMBIEN SE PUEDE USAR
+
+docker rmi "agregamos el id"
+
+
+VER LAS IMAGENES 
+
+docker images
